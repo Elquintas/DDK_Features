@@ -95,7 +95,7 @@ def DDK_Features(fs, data, audio):
 	
 	# F0 Extraction with Praat
 	path = './'
-	os.system('./Toolkits/praat F0_Praat.praat '+'./wavs/'+audio+' Toolkits/tempF0.txt 75 500 0.02')
+	os.system('./Toolkits/praat F0_Praat.praat '+'./wav/'+audio+' Toolkits/tempF0.txt 75 500 0.02')
 	F0 = praat_f0_decode('Toolkits/tempF0.txt')
 
 	
@@ -124,12 +124,12 @@ def DDK_Features(fs, data, audio):
 	average_vuv_period = 0.01
 	
 	# Extract Voiced and Unvoiced features with Praat
-	os.system('./Toolkits/praat '+'vuv.praat'+' '+'./wavs/'+audio+' '+'Toolkits/vuv.txt '
+	os.system('./Toolkits/praat '+'vuv.praat'+' '+'./wav/'+audio+' '+'Toolkits/vuv.txt '
 				+str(F0_min)+' '+str(F0_max)+' '+str(time_step_F0)
 				+' '+str(max_vuv_period)+' '+str(average_vuv_period))
 				
-	voiced_segments, fs = decode_Texgrid('Toolkits/vuv.txt', './wavs/'+audio, 'Voiced')
-	unvoiced_segments, fs = decode_Texgrid('Toolkits/vuv.txt', './wavs/'+audio, 'Unvoiced')
+	voiced_segments, fs = decode_Texgrid('Toolkits/vuv.txt', './wav/'+audio, 'Voiced')
+	unvoiced_segments, fs = decode_Texgrid('Toolkits/vuv.txt', './wav/'+audio, 'Unvoiced')
 	nr_voiced = len(voiced_segments)
 	nr_unvoiced = len(unvoiced_segments)
 	
@@ -182,7 +182,7 @@ def DDK_Features(fs, data, audio):
 if __name__=="__main__":
 		
 	path = "./"
-	wav_dir = os.path.join(path,'wavs')
+	wav_dir = os.path.join(path,'wav')
 	
 	titles = np.array(['Name','avg_F0','std_F0','max_F0','avg_E','std_E',
 						'max_E','DDK_rate','avgdur_DDK','reg_DDK',
